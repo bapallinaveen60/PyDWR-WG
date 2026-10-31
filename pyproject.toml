@@ -71,6 +71,6 @@ satellite = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/GeoVision-Research/PyDWR-WG"
-Repository = "https://github.com/GeoVision-Research/PyDWR-WG"
-Documentation = "https://github.com/GeoVision-Research/PyDWR-WG/docs"
+Homepage = "https://github.com/bapallinaveen60/PyDWR-WG"
+Repository = "https://github.com/bapallinaveen60/PyDWR-WG"
+Documentation = "https://github.com/bapallinaveen60/PyDWR-WG/tree/main/docs"

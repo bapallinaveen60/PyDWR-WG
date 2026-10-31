@@ -177,8 +177,8 @@ Elevation (m MSL)
 
 ### Option 1: Conda / Mamba Environment (Recommended)
 ```bash
-git clone <YOUR_GITHUB_REPO_URL>
-cd "Ground Polarimetric Doppler Radar De-Cluttering and Low-Level Warm Orographic Precipitation Reconstruction Over the Western Ghats"
+git clone https://github.com/bapallinaveen60/PyDWR-WG.git
+cd PyDWR-WG
 conda env create -f environment.yml
 conda activate pydwr-wg
 pip install -e .
@@ -268,7 +268,7 @@ When you create your remote GitHub repository, connect and push this local repos
 
 ```bash
 # 1. Add your GitHub remote URL
-git remote add origin https://github.com/<YOUR_USERNAME>/<YOUR_REPOSITORY_NAME>.git
+git remote add origin https://github.com/bapallinaveen60/PyDWR-WG.git
 
 # 2. Ensure main branch is active
 git branch -M main
