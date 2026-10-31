@@ -1,0 +1,70 @@
+# Radar and Topography Data Configuration for Western Ghats Domain
+
+radars:
+  mumbai:
+    name: "Mumbai S-band DWR"
+    band: "S"
+    latitude: 18.9180
+    longitude: 72.8250
+    altitude_m: 60.0
+    frequency_ghz: 2.8
+    beamwidth_deg: 1.0
+    pulse_width_us: 1.0
+    unambiguous_range_km: 250.0
+    max_processing_range_km: 100.0
+    clutter_blind_zone_km: 5.0
+
+  goa:
+    name: "Goa S-band DWR"
+    band: "S"
+    latitude: 15.4889
+    longitude: 73.8314
+    altitude_m: 75.0
+    frequency_ghz: 2.8
+    beamwidth_deg: 1.0
+    pulse_width_us: 1.0
+    unambiguous_range_km: 250.0
+    max_processing_range_km: 100.0
+    clutter_blind_zone_km: 5.0
+
+  kochi:
+    name: "Kochi S-band DWR"
+    band: "S"
+    latitude: 9.9400
+    longitude: 76.2600
+    altitude_m: 35.0
+    frequency_ghz: 2.8
+    beamwidth_deg: 1.0
+    pulse_width_us: 1.0
+    unambiguous_range_km: 250.0
+    max_processing_range_km: 100.0
+    clutter_blind_zone_km: 5.0
+
+  mandhardev:
+    name: "Mandhardev X-band Radar"
+    band: "X"
+    latitude: 18.0400
+    longitude: 73.8600
+    altitude_m: 1300.0
+    frequency_ghz: 9.4
+    beamwidth_deg: 0.9
+    max_processing_range_km: 80.0
+    clutter_blind_zone_km: 2.0
+
+hacpl_validation:
+  name: "High Altitude Cloud Physics Laboratory (HACPL) Mahabaleshwar"
+  latitude: 17.9200
+  longitude: 73.6000
+  altitude_m: 1378.0
+  instruments:
+    - "JWD (Joss-Waldvogel Disdrometer)"
+    - "2DVD (Two-Dimensional Video Disdrometer)"
+    - "MRR-2 (Micro Rain Radar 24 GHz, 0-6 km AGL, 200m bins)"
+
+ray_tracing:
+  earth_model: "effective_4_thirds_earth"
+  effective_radius_factor: 1.3333333
+  standard_refractivity_gradient: -39.0 # N-units/km
+  angular_resolution_deg: 0.1
+  radial_step_m: 100.0
+  beam_power_weighting: "gaussian" # 2D Gaussian beam shape

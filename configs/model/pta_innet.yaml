@@ -1,0 +1,55 @@
+# Model Configuration: Polarimetric Terrain-Aware Inpainting Network (PTA-InNet)
+
+architecture:
+  name: "PTA-InNet"
+  coordinate_system: "polar" # (r, theta) native radar space
+  tensor_shape: [10, 1000, 360] # [Channels, Nr, Na]
+  
+  channels:
+    0: "ZH_norm"          # Horizontal Reflectivity [-10, 75] dBZ
+    1: "ZDR_norm"         # Differential Reflectivity [-4, 8] dB
+    2: "RHOHV_clipped"    # Copolar Correlation [0.2, 1.0]
+    3: "PHIDP_unwrapped"  # Differential Propagation Phase normalized
+    4: "KDP_kalman"       # Specific Differential Phase [deg/km]
+    5: "VR_dealiased"     # Radial Velocity normalized [-Vnyq, +Vnyq]
+    6: "SW_width"         # Doppler Spectrum Width [m/s]
+    7: "DEM_elevation"    # SRTM Topographic Altitude [m] normalized
+    8: "BBF_fraction"     # Partial Beam Blockage Fraction [0.0, 1.0]
+    9: "H_beam_agl"       # Center beam height AGL [m] normalized
+
+  encoder:
+    stages: 5
+    channels: [64, 128, 256, 512, 1024]
+    convolution_type: "depthwise_separable"
+    normalization: "group_norm"
+    num_groups: 8
+    activation: "leaky_relu"
+    leaky_slope: 0.1
+    padding_mode:
+      range: "zeros"
+      azimuth: "circular" # Enforces 360 -> 0 continuity
+
+  bottleneck:
+    attention: "multihead_self_attention"
+    heads: 8
+    dropout: 0.1
+
+  decoders:
+    segmentation:
+      target: "clutter_probability_mask"
+      out_channels: 1
+      activation: "sigmoid"
+    reconstruction:
+      target: ["clean_reflectivity", "surface_rain_rate"]
+      out_channels: 2
+      activations: ["identity", "relu"]
+
+  loss_weights:
+    lambda_seg: 1.0
+    lambda_rec: 2.5
+    lambda_grad: 0.8
+    lambda_phys: 1.5
+    focal_gamma: 2.0
+    focal_alpha: 0.25
+    huber_delta: 1.0
+    epsilon_phase: 0.5

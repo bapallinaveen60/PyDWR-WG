@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=65.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pydwr-wg"
+version = "0.1.0"
+description = "Ground Polarimetric Doppler Radar De-Cluttering and Low-Level Warm Orographic Precipitation Reconstruction Over the Western Ghats"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "GeoVision Research Group", email = "research@geovision.org" }
+]
+keywords = [
+    "radar-meteorology",
+    "polarimetry",
+    "western-ghats",
+    "orographic-precipitation",
+    "clutter-removal",
+    "deep-learning",
+    "inpainting",
+    "satellite-ground-truthing",
+    "insat-3dr",
+    "gpm-dpr"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "numpy>=1.23.0",
+    "scipy>=1.9.0",
+    "pandas>=1.5.0",
+    "xarray>=2022.06.0",
+    "netCDF4>=1.6.0",
+    "h5py>=3.7.0",
+    "scikit-learn>=1.1.0",
+    "scikit-image>=0.19.0",
+    "matplotlib>=3.6.0",
+    "tqdm>=4.64.0",
+    "pyyaml>=6.0"
+]
+
+[project.optional-dependencies]
+gis = [
+    "arm-pyart>=1.15.0",
+    "rasterio>=1.3.0",
+    "geopandas>=0.12.0",
+    "cartopy>=0.21.0"
+]
+dev = [
+    "pytest>=7.2.0",
+    "pytest-cov>=4.0.0",
+    "flake8>=6.0.0",
+    "black>=23.0.0"
+]
+satellite = [
+    "satpy>=0.40.0",
+    "pyresample>=1.25.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/GeoVision-Research/PyDWR-WG"
+Repository = "https://github.com/GeoVision-Research/PyDWR-WG"
+Documentation = "https://github.com/GeoVision-Research/PyDWR-WG/docs"

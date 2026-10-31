@@ -1,0 +1,99 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Radar raw data, model checkpoints, and large arrays
+data/raw/**/*.nc
+data/raw/**/*.h5
+data/raw/**/*.hdf5
+data/raw/**/*.vol
+data/raw/**/*.tif
+data/raw/**/*.tiff
+data/raw/**/*.npz
+data/processed/**/*.nc
+data/processed/**/*.zarr
+data/processed/**/*.h5
+data/processed/**/*.npz
+data/clutter_maps/**/*.nc
+data/clutter_maps/**/*.npz
+data/blockage_masks/**/*.npz
+data/synthetic_scip/**/*.pt
+data/synthetic_scip/**/*.h5
+data/synthetic_scip/**/*.npz
+data/satellite_labels/**/*.npz
+checkpoints/*.pt
+checkpoints/*.pth
+experiments/
+logs/
+wandb/
+
+# Keep directory structure
+!data/**/.gitkeep
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db

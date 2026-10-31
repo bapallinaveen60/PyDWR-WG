@@ -1,0 +1,36 @@
+# Semi-Synthetic Clutter Injection Pipeline (SCIP) and Training Config
+
+scip:
+  pristine_source: "arabian_sea_offshore" # Azimuth sectors 200 - 340 deg
+  min_pristine_rhohv: 0.96
+  clutter_source: "pre_monsoon_dry_scans" # March - May composites
+  synthetic_blockage:
+    simulate_mountain_barriers: true
+    attenuate_power_by_bbf: true
+    preserve_downstream_phidp: true
+  augmentation:
+    random_azimuth_roll: true
+    random_range_scaling: false
+    gaussian_noise_std: 0.02
+    rain_rate_scale_factor: [0.7, 1.4]
+
+optimization:
+  optimizer: "AdamW"
+  lr: 2.0e-4
+  min_lr: 1.0e-6
+  weight_decay: 1.0e-4
+  betas: [0.9, 0.999]
+  scheduler: "cosine_annealing"
+  t_max: 100
+  warmup_epochs: 5
+  epochs: 100
+  batch_size: 8
+  gradient_clip_val: 1.0
+  precision: "16-mixed"
+
+hardware:
+  gpus: 4
+  accelerator: "gpu"
+  distributed_backend: "nccl"
+  num_workers: 4
+  pin_memory: true

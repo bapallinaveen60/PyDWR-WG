@@ -1,0 +1,45 @@
+# Geostationary Satellite Collocation & Downstream Retraining Config
+
+satellite:
+  sensor: "INSAT-3DR Imager"
+  sub_satellite_lon: 74.0
+  channels:
+    - "TIR1" # Thermal Infrared 1 (10.8 um)
+    - "TIR2" # Thermal Infrared 2 (12.0 um)
+    - "MIR"  # Middle Infrared (3.9 um)
+    - "WV"   # Water Vapor (6.9 um)
+  spatial_resolution_km: 4.0 # Imager nadir resolution resampled to 1km grid
+  parallax_correction:
+    enabled: true
+    reference_cloud_top_height_km: 3.5 # Warm shallow orographic cloud tops
+
+reanalysis:
+  source: "ERA5"
+  fields:
+    - "cape" # Convective Available Potential Energy [J/kg]
+    - "tcwv" # Total Column Water Vapor [kg/m2]
+  temporal_interpolation: "linear"
+  spatial_regrid: "bilinear_1km"
+
+collocation:
+  temporal_tolerance_minutes: 10
+  target_grid:
+    projection: "EPSG:4326"
+    lat_min: 8.0
+    lat_max: 20.0
+    lon_min: 71.0
+    lon_max: 78.0
+    pixel_size_deg: 0.01 # ~1 km
+
+precipitation_classes:
+  0: "No-Rain"
+  1: "Stratiform"
+  2: "Deep Convective"
+  3: "Shallow Isolated Convective"
+  4: "Shallow Non-Isolated Convective"
+
+retraining:
+  model_type: "Hierarchical U-Net (8-channel)"
+  baseline_labels: "uncorrected_gpm_dpr"
+  corrected_labels: "pta_innet_ground_radar"
+  evaluation_metric: "shallow_warm_rain_recall"

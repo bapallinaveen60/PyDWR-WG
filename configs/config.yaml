@@ -1,0 +1,58 @@
+# PyDWR-WG Master Configuration
+
+project:
+  name: "PyDWR-WG"
+  description: "Ground Polarimetric Doppler Radar De-Cluttering and Low-Level Warm Orographic Precipitation Reconstruction Over the Western Ghats"
+  version: "0.1.0"
+  seed: 42
+
+domain:
+  region: "Western Ghats, India"
+  lat_bounds: [8.0, 21.0]
+  lon_bounds: [71.0, 78.0]
+  primary_monsoon_months: [6, 7, 8, 9]  # JJAS
+
+radar:
+  grid:
+    n_range_gates: 1000
+    range_resolution_m: 100.0   # 0 to 100 km at 100m spacing
+    max_range_km: 100.0
+    n_azimuths: 360
+    azimuth_resolution_deg: 1.0
+  elevations_deg: [0.5, 1.5, 2.5, 3.5, 4.5, 6.0, 9.0]
+  reference_elevation_deg: 0.5
+  wavelength_m: 0.107  # S-band (~10 cm)
+  kw2: 0.93            # Dielectric factor of liquid water
+
+model:
+  name: "PTA-InNet"
+  in_channels: 10
+  encoder_channels: [64, 128, 256, 512, 1024]
+  num_groups: 8
+  dropout: 0.1
+  attention_heads: 8
+  loss_weights:
+    lambda_seg: 1.0     # Focal + Jaccard
+    lambda_rec: 2.5     # Huber loss
+    lambda_grad: 0.8    # Spatial gradient smoothness
+    lambda_phys: 1.5    # Phase path-integral consistency
+
+training:
+  batch_size: 8
+  learning_rate: 2.0e-4
+  min_lr: 1.0e-6
+  weight_decay: 1.0e-4
+  epochs: 100
+  num_workers: 4
+  mixed_precision: true
+  gradient_clip: 1.0
+
+paths:
+  raw_radar_dir: "data/raw/imd_radars"
+  srtm_dem_dir: "data/raw/srtm_dem"
+  hacpl_dir: "data/raw/hacpl_disdrometer"
+  insat_dir: "data/raw/insat3dr"
+  processed_dir: "data/processed"
+  blockage_dir: "data/blockage_masks"
+  checkpoints_dir: "checkpoints"
+  experiments_dir: "experiments"
